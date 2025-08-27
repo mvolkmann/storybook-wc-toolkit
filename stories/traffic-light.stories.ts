@@ -41,12 +41,20 @@ export const Default: Story = {
   },
 };
 
-// Lots of code is needed in order to specify component attributes!
-const Template = ({ state }) => {
+// This render function sets attributes from args entries.
+const render = (args: Record<string, string>) => {
   const el = document.createElement("traffic-light");
-  if (state) el.setAttribute("state", state); // ✅ sets attribute, not property
+  for (const [key, value] of Object.entries(args)) {
+    el.setAttribute(key, value);
+  }
   return el;
 };
 
-export const Specified: Story = Template.bind({});
-Specified.args = { state: "go" };
+export const Specified: Story = {
+  args: { state: "go" },
+  // The default render function assumes that the component being tested
+  // has a settable property that corresponds to each args entry.
+  // The traffic-light component does not have a settable "state" property,
+  // so we must use a custom render function.
+  render,
+};
