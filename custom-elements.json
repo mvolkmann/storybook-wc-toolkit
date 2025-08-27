@@ -8,7 +8,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "This is a simple web component that renders a greeting message.",
           "name": "HelloWorld",
           "members": [
             {
@@ -23,7 +23,12 @@
           ],
           "attributes": [
             {
-              "name": "name"
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "The name of the person to greet",
+              "default": "\"World\""
             }
           ],
           "superclass": {
@@ -54,7 +59,7 @@
           "type": {
             "text": "Meta"
           },
-          "default": "{ title: \"Components/HelloWorld\", component: \"hello-world\", argTypes: { name: { control: \"text\" }, }, }"
+          "default": "{ title: \"Components/HelloWorld\", component: \"hello-world\", args, argTypes, render: (args) => template(args), parameters: { actions: { handles: events, }, }, tags: [\"autodocs\"], }"
         },
         {
           "kind": "variable",

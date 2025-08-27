@@ -4,10 +4,11 @@
   "description": "This project demonstrates the use of Storybook and wc-toolkit with a vanilla web component.",
   "main": "index.js",
   "scripts": {
+    "build-storybook": "storybook build",
     "cem": "custom-elements-manifest analyze",
     "dev": "vite",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "reinstall": "rm -rf node_modules package-lock.json && npm install",
+    "storybook": "storybook dev -p 6006"
   },
   "keywords": [],
   "author": "",
