@@ -33,7 +33,7 @@ export const Default: Story = {
       expect(p).toHaveTextContent(`Hello, ${name}!`);
     }
 
-    let name = "World"; // intentional error
+    let name = "World";
     // The "name" attribute is not set yet.
     verifyText(name);
 
@@ -48,6 +48,8 @@ export const Default: Story = {
     helloWorld.name = name;
     expect(helloWorld).toHaveAttribute("name", name);
     verifyText(name);
+
+    helloWorld.name = "World"; // return to default value
   },
 };
 
