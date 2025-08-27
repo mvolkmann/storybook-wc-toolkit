@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "hello-world.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "HelloWorld",
+          "members": [
+            {
+              "kind": "field",
+              "name": "#span",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "name"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hello-world",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "hello-world",
+          "declaration": {
+            "name": "HelloWorld",
+            "module": "hello-world.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "stories/hello-world.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "meta",
+          "type": {
+            "text": "Meta"
+          },
+          "default": "{ title: \"Components/HelloWorld\", component: \"hello-world\", argTypes: { name: { control: \"text\" }, }, }"
+        },
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "Story"
+          },
+          "default": "{}"
+        },
+        {
+          "kind": "variable",
+          "name": "Named",
+          "type": {
+            "text": "Story"
+          },
+          "default": "{ args: { name: \"Mark\", }, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "meta",
+            "module": "stories/hello-world.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "stories/hello-world.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Named",
+          "declaration": {
+            "name": "Named",
+            "module": "stories/hello-world.stories.ts"
+          }
+        }
+      ]
+    }
+  ]
+}
