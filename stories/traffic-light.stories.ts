@@ -5,7 +5,9 @@ import "../traffic-light";
 
 const { events, args, argTypes, template } =
   getStorybookHelpers("traffic-light");
-console.log("traffic-light.stories.ts : events =", events);
+//console.log("traffic-light.stories.ts : events =", events);
+// events is set to ["state-change"] which is an array containing
+// the event name that is dispatched by the TrafficLight next method.
 
 const meta: Meta = {
   title: "Components/TrafficLight",
@@ -14,6 +16,8 @@ const meta: Meta = {
   argTypes,
   render: (args) => template(args),
   parameters: {
+    // This should cause "state-change" events to be logged to the
+    // Actions tab when the tests are run, but it does not work.
     actions: {
       handles: events,
     },
