@@ -89,11 +89,15 @@ class TrafficLight extends HTMLElement {
     this.#state = s === "stop" ? "yield" : s === "yield" ? "go" : "stop";
     this.#change(true);
     this.dispatchEvent(
-      new CustomEvent("stateChanged", {
+      new CustomEvent("state-change", {
         detail: { state: this.#state },
         bubbles: true,
         composed: true,
       })
+    );
+    console.log(
+      'traffic-light.js "next": dispatched state-change for',
+      this.#state
     );
   }
 

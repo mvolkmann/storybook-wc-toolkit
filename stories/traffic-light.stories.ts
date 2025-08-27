@@ -5,6 +5,7 @@ import "../traffic-light";
 
 const { events, args, argTypes, template } =
   getStorybookHelpers("traffic-light");
+console.log("traffic-light.stories.ts : events =", events);
 
 const meta: Meta = {
   title: "Components/TrafficLight",
@@ -30,10 +31,13 @@ export const Default: Story = {
     ) as TrafficLight;
     expect(trafficLight).toBeInTheDocument();
 
+    // There are two ways to advance to the next state,
+    // calling the next method or clicking the button.
+
     trafficLight.next();
     expect(trafficLight).toHaveProperty("state", "yield");
 
-    trafficLight.next();
+    trafficLight.shadowRoot?.querySelector("button")?.click();
     expect(trafficLight).toHaveProperty("state", "go");
 
     trafficLight.next();
