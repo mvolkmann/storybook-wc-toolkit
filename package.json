@@ -8,7 +8,10 @@
     "cem": "custom-elements-manifest analyze",
     "dev": "vite",
     "reinstall": "rm -rf node_modules package-lock.json && npm install",
-    "storybook": "storybook dev -p 6006"
+    "storybook": "storybook dev -p 6006",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest"
   },
   "keywords": [],
   "author": "",

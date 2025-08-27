@@ -1,3 +1,4 @@
+import { expect } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
 import "../hello-world";
@@ -21,7 +22,34 @@ export default meta;
 
 type Story = StoryObj<HelloWorld & typeof args>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  play: ({ canvasElement }) => {
+    const helloWorld = canvasElement.querySelector("hello-world") as HelloWorld;
+    expect(helloWorld).toBeInTheDocument();
+
+    function verifyText(name: string) {
+      const p = helloWorld.shadowRoot?.querySelector("p");
+      expect(p).toBeInTheDocument();
+      expect(p).toHaveTextContent(`Hello, ${name}!`);
+    }
+
+    let name = "World"; // intentional error
+    // The "name" attribute is not set yet.
+    verifyText(name);
+
+    // Set the "name" attribute.
+    name = "Tami";
+    helloWorld.setAttribute("name", name);
+    expect(helloWorld).toHaveProperty("name", name);
+    verifyText(name);
+
+    // Set the "name" property.
+    name = "Comet";
+    helloWorld.name = name;
+    expect(helloWorld).toHaveAttribute("name", name);
+    verifyText(name);
+  },
+};
 
 export const Named: Story = {
   args: {
