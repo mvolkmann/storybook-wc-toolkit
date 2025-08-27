@@ -83,14 +83,6 @@ class TrafficLight extends HTMLElement {
     return this.#state;
   }
 
-  // TODO: Does Storybook require having this method?
-  set state(value) {
-    if (TrafficLight.states.includes(value)) {
-      this.#state = value;
-      this.#change(true);
-    }
-  }
-
   next() {
     this.#change(false);
     const s = this.#state;

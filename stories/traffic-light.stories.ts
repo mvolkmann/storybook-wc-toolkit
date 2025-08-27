@@ -41,8 +41,12 @@ export const Default: Story = {
   },
 };
 
-export const Specified: Story = {
-  args: {
-    state: "go",
-  },
+// Lots of code is needed in order to specify component attributes!
+const Template = ({ state }) => {
+  const el = document.createElement("traffic-light");
+  if (state) el.setAttribute("state", state); // ✅ sets attribute, not property
+  return el;
 };
+
+export const Specified: Story = Template.bind({});
+Specified.args = { state: "go" };
