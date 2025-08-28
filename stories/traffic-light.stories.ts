@@ -78,6 +78,6 @@ export const Specified: Story = {
     trafficLight.click();
     expect(trafficLight).toHaveProperty("state", "yield");
     trafficLight.click();
-    expect(trafficLight).toHaveProperty("state", "gox");
+    expect(trafficLight).toHaveProperty("state", "go");
   },
 };
