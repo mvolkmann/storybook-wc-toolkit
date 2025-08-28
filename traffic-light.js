@@ -13,12 +13,13 @@ template.innerHTML = html`
       padding: 0.5rem;
     }
     div {
+      --size: 3rem;
       border: none;
       border-radius: 50%;
       font-weight: bold;
       padding: 0.5rem;
-      height: 3rem;
-      width: 3rem;
+      height: var(--size);
+      width: var(--size);
 
       opacity: 0.4;
       &.on {
