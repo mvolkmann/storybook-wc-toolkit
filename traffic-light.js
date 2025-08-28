@@ -74,8 +74,9 @@ class TrafficLight extends HTMLElement {
       this.#stateToDivMap.set(state, divs[index]);
     });
 
-    const button = this.shadowRoot.querySelector("button");
-    button.addEventListener("click", () => this.next());
+    // Listen on the custom element instead of the button
+    // so the click method can be called on it.
+    this.addEventListener("click", () => this.next());
     this.#change(true);
   }
 
@@ -95,10 +96,12 @@ class TrafficLight extends HTMLElement {
         composed: true,
       })
     );
+    /*
     console.log(
       'traffic-light.js "next": dispatched state-change for',
       this.#state
     );
+    */
   }
 
   #change(on) {

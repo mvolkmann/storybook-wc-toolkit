@@ -28,6 +28,7 @@ export default meta;
 
 type Story = StoryObj<TrafficLight & typeof args>;
 
+// This story does not specify a value for the "state" attribute.
 export const Default: Story = {
   play: ({ canvasElement }) => {
     const trafficLight = canvasElement.querySelector(
@@ -58,6 +59,7 @@ const render = (args: Record<string, string>) => {
   return el;
 };
 
+// This story specifies a value for the "state" attribute.
 export const Specified: Story = {
   args: { state: "go" },
   // The default render function assumes that the component being tested
@@ -65,4 +67,17 @@ export const Specified: Story = {
   // The traffic-light component does not have a settable "state" property,
   // so we must use a custom render function.
   render,
+  play: async ({ canvasElement }) => {
+    const trafficLight = canvasElement.querySelector(
+      "traffic-light"
+    ) as HTMLElement;
+    expect(trafficLight).toBeInTheDocument();
+    expect(trafficLight).toHaveProperty("state", "go");
+    trafficLight.click();
+    expect(trafficLight).toHaveProperty("state", "stop");
+    trafficLight.click();
+    expect(trafficLight).toHaveProperty("state", "yield");
+    trafficLight.click();
+    expect(trafficLight).toHaveProperty("state", "gox");
+  },
 };
