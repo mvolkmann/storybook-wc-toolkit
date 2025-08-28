@@ -2,7 +2,6 @@
   "name": "storybook-wc-toolkit",
   "version": "1.0.0",
   "description": "This project demonstrates the use of Storybook and wc-toolkit with a vanilla web component.",
-  "main": "index.js",
   "scripts": {
     "build-storybook": "storybook build",
     "cem": "custom-elements-manifest analyze",
@@ -13,9 +12,13 @@
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "web components",
+    "Storybook",
+    "wc-toolkit"
+  ],
+  "author": "R. Mark Volkmann (r.mark.volkmann@gmail.com)",
+  "license": "MIT",
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.1",
     "@custom-elements-manifest/analyzer": "^0.10.5",
