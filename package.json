@@ -13,8 +13,8 @@
   "customElements": "custom-elements.json",
   "scripts": {
     "build-storybook": "storybook build",
-    "cem": "custom-elements-manifest analyze --exclude ./storybook-static",
-    "cem:watch": "custom-elements-manifest analyze --exclude ./storybook-static --watch",
+    "cem": "custom-elements-manifest analyze",
+    "cem:watch": "custom-elements-manifest analyze --watch",
     "deploy-storybook": "gh-pages -d storybook-static",
     "dev": "vite",
     "lint": "oxlint",

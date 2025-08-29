@@ -1,7 +1,7 @@
 import { expect } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
-import TrafficLight from "../traffic-light";
+import TrafficLight from "../src/traffic-light.ts";
 //TODO: Why does this breaks unless I output TrafficLight?
 console.log("traffic-light.stories.ts:", TrafficLight);
 

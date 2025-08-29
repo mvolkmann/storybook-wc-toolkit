@@ -1,7 +1,7 @@
 import { expect } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
-import HelloWorld from "../hello-world";
+import HelloWorld from "../src/hello-world.ts";
 //TODO: Why does this breaks unless I output HelloWorld?
 console.log("hello-world.stories.ts:", HelloWorld);
 
