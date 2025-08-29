@@ -1,9 +1,10 @@
 import { expect } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
-import HelloWorld from "../src/hello-world.ts";
-//TODO: Why does this breaks unless I output HelloWorld?
-console.log("hello-world.stories.ts:", HelloWorld);
+
+//TODO: Why are both of these imports required?
+import "../src/hello-world.ts";
+import type { HelloWorld } from "../src/hello-world.ts";
 
 const { events, args, argTypes, template } = getStorybookHelpers("hello-world");
 
@@ -14,7 +15,7 @@ const meta: Meta<HelloWorldArgs> = {
   title: "Components/HelloWorld",
   component: "hello-world",
   args,
-  //argTypes, // Including this breaks the Storybook Controls panel.
+  argTypes,
   render: (args) => template(args),
   parameters: {
     actions: {

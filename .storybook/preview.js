@@ -1,6 +1,8 @@
 import { setCustomElementsManifest } from "@storybook/web-components";
+import { setStorybookHelpersConfig } from "@wc-toolkit/storybook-helpers";
 import manifest from "../custom-elements.json" with { type: "json" };
 
+setStorybookHelpersConfig({});
 setCustomElementsManifest(manifest);
  
 /** @type { import('@storybook/web-components-vite').Preview } */

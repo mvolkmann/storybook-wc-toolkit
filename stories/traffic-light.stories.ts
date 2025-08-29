@@ -1,9 +1,10 @@
 import { expect } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
-import TrafficLight from "../src/traffic-light.ts";
-//TODO: Why does this breaks unless I output TrafficLight?
-console.log("traffic-light.stories.ts:", TrafficLight);
+
+//TODO: Why are both of these imports required?
+import "../src/traffic-light.ts";
+import type { TrafficLight } from "../src/traffic-light.ts";
 
 const { events, args, argTypes, template } =
   getStorybookHelpers("traffic-light");
@@ -17,7 +18,7 @@ const meta: Meta<TrafficLightArgs> = {
   title: "Components/TrafficLight",
   component: "traffic-light",
   args,
-  //argTypes, // Including this breaks the Storybook Controls panel.
+  argTypes,
   render: (args) => template(args),
   parameters: {
     // This should cause "state-change" events to be logged to the
