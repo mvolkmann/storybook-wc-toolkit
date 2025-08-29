@@ -4,7 +4,7 @@
   "modules": [
     {
       "kind": "javascript-module",
-      "path": "hello-world.js",
+      "path": "hello-world.ts",
       "declarations": [
         {
           "kind": "class",
@@ -13,7 +13,10 @@
           "members": [
             {
               "kind": "field",
-              "name": "#span",
+              "name": "span",
+              "type": {
+                "text": "HTMLSpanElement | undefined | null"
+              },
               "privacy": "private"
             },
             {
@@ -40,18 +43,26 @@
       ],
       "exports": [
         {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "HelloWorld",
+            "module": "hello-world.ts"
+          }
+        },
+        {
           "kind": "custom-element-definition",
           "name": "hello-world",
           "declaration": {
             "name": "HelloWorld",
-            "module": "hello-world.js"
+            "module": "hello-world.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "traffic-light.js",
+      "path": "traffic-light.ts",
       "declarations": [
         {
           "kind": "class",
@@ -64,17 +75,22 @@
               "type": {
                 "text": "array"
               },
+              "privacy": "private",
               "static": true,
               "default": "[\"stop\", \"yield\", \"go\"]"
             },
             {
               "kind": "field",
-              "name": "#state",
-              "privacy": "private"
+              "name": "_state",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "\"stop\""
             },
             {
               "kind": "field",
-              "name": "#stateToDivMap",
+              "name": "stateToDivMap",
               "privacy": "private",
               "default": "new Map()"
             },
@@ -89,11 +105,14 @@
             },
             {
               "kind": "method",
-              "name": "#change",
+              "name": "change",
               "privacy": "private",
               "parameters": [
                 {
-                  "name": "on"
+                  "name": "on",
+                  "type": {
+                    "text": "boolean"
+                  }
                 }
               ]
             }
@@ -125,32 +144,22 @@
       ],
       "exports": [
         {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "TrafficLight",
+            "module": "traffic-light.ts"
+          }
+        },
+        {
           "kind": "custom-element-definition",
           "name": "traffic-light",
           "declaration": {
             "name": "TrafficLight",
-            "module": "traffic-light.js"
+            "module": "traffic-light.ts"
           }
         }
       ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "coverage/block-navigation.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "coverage/prettify.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "coverage/sorter.js",
-      "declarations": [],
-      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -162,7 +171,7 @@
           "type": {
             "text": "Meta"
           },
-          "default": "{ title: \"Components/HelloWorld\", component: \"hello-world\", args, argTypes, render: (args) => template(args), parameters: { actions: { handles: events, }, }, tags: [\"autodocs\"], }"
+          "default": "{ title: \"Components/HelloWorld\", component: \"hello-world\", args, //argTypes, // Including this breaks the Storybook Controls panel. render: (args) => template(args), parameters: { actions: { handles: events, }, }, tags: [\"autodocs\"], }"
         },
         {
           "kind": "variable",
@@ -218,7 +227,7 @@
           "type": {
             "text": "Meta"
           },
-          "default": "{ title: \"Components/TrafficLight\", component: \"traffic-light\", args, argTypes, render: (args) => template(args), parameters: { actions: { handles: events, }, }, tags: [\"autodocs\"], }"
+          "default": "{ title: \"Components/TrafficLight\", component: \"traffic-light\", args, //argTypes, // Including this breaks the Storybook Controls panel. render: (args) => template(args), parameters: { // This should cause \"state-change\" events to be logged to the // Actions tab when the tests are run, but it does not work. actions: { handles: events, }, }, tags: [\"autodocs\"], }"
         },
         {
           "kind": "variable",
@@ -226,7 +235,7 @@
           "type": {
             "text": "Story"
           },
-          "default": "{ play: ({ canvasElement }) => { const trafficLight = canvasElement.querySelector( \"traffic-light\" ) as TrafficLight; expect(trafficLight).toBeInTheDocument(); // There are two ways to advance to the next state, // calling the next method or clicking the button. trafficLight.next(); expect(trafficLight).toHaveProperty(\"state\", \"yield\"); trafficLight.shadowRoot?.querySelector(\"button\")?.click(); expect(trafficLight).toHaveProperty(\"state\", \"go\"); trafficLight.next(); expect(trafficLight).toHaveProperty(\"state\", \"stop\"); trafficLight.dispatchEvent( new CustomEvent(\"state-change\", { bubbles: true, composed: true }) ); }, }"
+          "default": "{ play: ({ canvasElement }) => { const trafficLight = canvasElement.querySelector( \"traffic-light\" ) as TrafficLight; expect(trafficLight).toBeInTheDocument(); // There are two ways to advance to the next state, // calling the next method or clicking the button. trafficLight.next(); expect(trafficLight).toHaveProperty(\"state\", \"yield\"); trafficLight.shadowRoot?.querySelector(\"button\")?.click(); expect(trafficLight).toHaveProperty(\"state\", \"go\"); trafficLight.next(); expect(trafficLight).toHaveProperty(\"state\", \"stop\"); }, }"
         },
         {
           "kind": "variable",
@@ -234,7 +243,7 @@
           "type": {
             "text": "Story"
           },
-          "default": "{ args: { state: \"go\" }, // The default render function assumes that the component being tested // has a settable property that corresponds to each args entry. // The traffic-light component does not have a settable \"state\" property, // so we must use a custom render function. render, }"
+          "default": "{ args: { state: \"go\" }, // The default render function assumes that the component being tested // has a settable property that corresponds to each args entry. // The traffic-light component does not have a settable \"state\" property, // so we must use a custom render function. render, play: async ({ canvasElement }) => { const trafficLight = canvasElement.querySelector( \"traffic-light\" ) as HTMLElement; expect(trafficLight).toBeInTheDocument(); expect(trafficLight).toHaveProperty(\"state\", \"go\"); trafficLight.click(); expect(trafficLight).toHaveProperty(\"state\", \"stop\"); trafficLight.click(); expect(trafficLight).toHaveProperty(\"state\", \"yield\"); trafficLight.click(); expect(trafficLight).toHaveProperty(\"state\", \"go\"); }, }"
         }
       ],
       "exports": [
@@ -263,6 +272,24 @@
           }
         }
       ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "coverage/block-navigation.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "coverage/prettify.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "coverage/sorter.js",
+      "declarations": [],
+      "exports": []
     }
   ]
 }

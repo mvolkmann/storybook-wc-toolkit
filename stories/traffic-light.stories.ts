@@ -1,11 +1,12 @@
 import { expect } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
-import "../traffic-light";
+import TrafficLight from "../traffic-light";
+//TODO: Why does this breaks unless I output TrafficLight?
+console.log("traffic-light.stories.ts:", TrafficLight);
 
 const { events, args, argTypes, template } =
   getStorybookHelpers("traffic-light");
-//console.log("traffic-light.stories.ts : events =", events);
 // events is set to ["state-change"] which is an array containing
 // the event name that is dispatched by the TrafficLight next method.
 
@@ -13,7 +14,7 @@ const meta: Meta = {
   title: "Components/TrafficLight",
   component: "traffic-light",
   args,
-  argTypes,
+  //argTypes, // Including this breaks the Storybook Controls panel.
   render: (args) => template(args),
   parameters: {
     // This should cause "state-change" events to be logged to the
@@ -26,7 +27,7 @@ const meta: Meta = {
 };
 export default meta;
 
-type Story = StoryObj<TrafficLight & typeof args>;
+type Story = StoryObj<typeof meta>;
 
 // This story does not specify a value for the "state" attribute.
 export const Default: Story = {

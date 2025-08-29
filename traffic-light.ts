@@ -54,10 +54,10 @@ template.innerHTML = html`
  * modifying the `state` attribute or setting the `state` property.
  * @attr {string} [state="stop"] - The starting state.
  */
-class TrafficLight extends HTMLElement {
-  static states = ["stop", "yield", "go"];
-  #state;
-  #stateToDivMap = new Map();
+export default class TrafficLight extends HTMLElement {
+  private static states = ["stop", "yield", "go"];
+  private _state: string = "stop";
+  private stateToDivMap = new Map();
 
   constructor() {
     super();
@@ -65,34 +65,34 @@ class TrafficLight extends HTMLElement {
   }
 
   connectedCallback() {
-    const initial = this.getAttribute("state");
-    this.#state = TrafficLight.states.includes(initial) ? initial : "stop";
+    const initial = this.getAttribute("state") ?? "";
+    this._state = TrafficLight.states.includes(initial) ? initial : "stop";
 
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
+    this.shadowRoot?.appendChild(template.content.cloneNode(true));
 
-    const divs = this.shadowRoot.querySelectorAll("div");
+    const divs = this.shadowRoot?.querySelectorAll("div") ?? [];
     TrafficLight.states.forEach((state, index) => {
-      this.#stateToDivMap.set(state, divs[index]);
+      this.stateToDivMap.set(state, divs[index]);
     });
 
     // Listen on the custom element instead of the button
     // so the click method can be called on it.
     this.addEventListener("click", () => this.next());
-    this.#change(true);
+    this.change(true);
   }
 
   get state() {
-    return this.#state;
+    return this._state;
   }
 
   next() {
-    this.#change(false);
-    const s = this.#state;
-    this.#state = s === "stop" ? "yield" : s === "yield" ? "go" : "stop";
-    this.#change(true);
+    this.change(false);
+    const s = this.state;
+    this._state = s === "stop" ? "yield" : s === "yield" ? "go" : "stop";
+    this.change(true);
     this.dispatchEvent(
       new CustomEvent("state-change", {
-        detail: { state: this.#state },
+        detail: { state: this.state },
         bubbles: true,
         composed: true,
       })
@@ -105,8 +105,8 @@ class TrafficLight extends HTMLElement {
     */
   }
 
-  #change(on) {
-    this.#stateToDivMap.get(this.#state).classList.toggle("on", on);
+  private change(on: boolean) {
+    this.stateToDivMap.get(this.state).classList.toggle("on", on);
   }
 }
 

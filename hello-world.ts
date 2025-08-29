@@ -7,8 +7,8 @@ template.innerHTML = html`<p>Hello, <span></span>!</p>`;
  * This is a simple web component that renders a greeting message.
  * @attr {string} [name="World"] - The name of the person to greet
  */
-class HelloWorld extends HTMLElement {
-  #span;
+export default class HelloWorld extends HTMLElement {
+  private span: HTMLSpanElement | undefined | null;
 
   static get observedAttributes() {
     return ["name"];
@@ -19,23 +19,25 @@ class HelloWorld extends HTMLElement {
     this.attachShadow({ mode: "open" });
   }
 
-  attributeChangedCallback(name, _oldValue, newValue) {
-    if (this.#span && name === "name") {
-      this.#span.textContent = newValue;
+  attributeChangedCallback(name: string, _oldValue: string, newValue: string) {
+    if (this.span && name === "name") {
+      this.span.textContent = newValue;
     }
   }
 
   connectedCallback() {
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
-    this.#span = this.shadowRoot.querySelector("span");
-    this.#span.textContent = this.getAttribute("name") || "World";
+    this.shadowRoot?.appendChild(template.content.cloneNode(true));
+    this.span = this.shadowRoot?.querySelector("span");
+    if (this.span) {
+      this.span.textContent = this.getAttribute("name") || "World";
+    }
   }
 
   get name() {
-    return this.getAttribute("name");
+    return this.getAttribute("name") ?? "";
   }
 
-  set name(value) {
+  set name(value: string) {
     this.setAttribute("name", value);
   }
 }

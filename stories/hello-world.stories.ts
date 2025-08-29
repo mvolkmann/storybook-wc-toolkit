@@ -1,7 +1,9 @@
 import { expect } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
-import "../hello-world";
+import HelloWorld from "../hello-world";
+//TODO: Why does this breaks unless I output HelloWorld?
+console.log("hello-world.stories.ts:", HelloWorld);
 
 const { events, args, argTypes, template } = getStorybookHelpers("hello-world");
 
@@ -9,7 +11,7 @@ const meta: Meta = {
   title: "Components/HelloWorld",
   component: "hello-world",
   args,
-  argTypes,
+  //argTypes, // Including this breaks the Storybook Controls panel.
   render: (args) => template(args),
   parameters: {
     actions: {
@@ -20,7 +22,7 @@ const meta: Meta = {
 };
 export default meta;
 
-type Story = StoryObj<HelloWorld & typeof args>;
+type Story = StoryObj<Meta<HelloWorld>>;
 
 export const Default: Story = {
   play: ({ canvasElement }) => {
