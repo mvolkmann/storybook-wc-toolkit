@@ -10,7 +10,10 @@ const { events, args, argTypes, template } =
 // events is set to ["state-change"] which is an array containing
 // the event name that is dispatched by the TrafficLight next method.
 
-const meta: Meta = {
+type TrafficLightArgs = {
+  state?: string;
+};
+const meta: Meta<TrafficLightArgs> = {
   title: "Components/TrafficLight",
   component: "traffic-light",
   args,
@@ -27,7 +30,7 @@ const meta: Meta = {
 };
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<TrafficLight>;
 
 // This story does not specify a value for the "state" attribute.
 export const Default: Story = {
