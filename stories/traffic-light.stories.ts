@@ -60,6 +60,7 @@ export const Default: Story = {
 };
 
 // This render function sets attributes from args entries.
+//TODO: Why is this needed?
 const render = (args: Record<string, string>) => {
   const el = document.createElement("traffic-light");
   for (const [key, value] of Object.entries(args)) {
