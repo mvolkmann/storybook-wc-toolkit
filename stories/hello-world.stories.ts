@@ -14,10 +14,7 @@ import "../src/hello-world.ts";
 
 const { events, args, argTypes, template } = getStorybookHelpers("hello-world");
 
-type HelloWorldArgs = {
-  name?: string;
-};
-const meta: Meta<HelloWorldArgs> = {
+const meta: Meta<HelloWorld> = {
   title: "Components/HelloWorld",
   component: "hello-world",
   args,
@@ -32,7 +29,7 @@ const meta: Meta<HelloWorldArgs> = {
 };
 export default meta;
 
-type Story = StoryObj<HelloWorldArgs>;
+type Story = StoryObj<HelloWorld & typeof args>;
 
 export const Default: Story = {
   play: ({ canvasElement }) => {
