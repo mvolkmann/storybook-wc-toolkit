@@ -2,9 +2,15 @@ import { expect } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
 
-//TODO: Why are both of these imports required?
-import "../src/traffic-light.ts";
+// Type-only imports are used by TypeScript for type checking,
+// but are erased during compilation.
+// They do not cause the module to be loaded at runtime.
 import type { TrafficLight } from "../src/traffic-light.ts";
+
+// This is a side-effect import, which is one that
+// loads a module without importing any specific bindings.
+// Its purpose is to execute the module’s code.
+import "../src/traffic-light.ts";
 
 const { events, args, argTypes, template } =
   getStorybookHelpers("traffic-light");
