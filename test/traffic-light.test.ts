@@ -2,7 +2,7 @@
 
 import { expect, test } from "vitest";
 
-//import { composeStories } from "@storybook/web-components";
+//import { composeStories } from "@storybook/web-components-vite";
 
 import * as stories from "../src/stories/traffic-light.stories";
 

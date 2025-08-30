@@ -91,7 +91,7 @@ in this project is modified.
 1. Add the following lines at the beginning of `.storybook/preview.js`:
 
    ```js
-   import { setCustomElementsManifest } from "@storybook/web-components";
+   import { setCustomElementsManifest } from "@storybook/web-components-vite";
    import manifest from "../custom-elements.json" with { type: "json" };
 
    setCustomElementsManifest(manifest);
