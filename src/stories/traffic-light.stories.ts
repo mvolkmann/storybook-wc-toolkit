@@ -5,13 +5,13 @@ import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
 // Type-only imports are used by TypeScript for type checking,
 // but are erased during compilation.
 // They do not cause the module to be loaded at runtime.
-import type { TrafficLight } from "../src/traffic-light.ts";
+import type { TrafficLight } from "../traffic-light.ts";
 
 // This is a side-effect import, which loads a module
 // without importing any specific bindings.
 // Its purpose is to execute the module's code
 // which registers the custom element.
-import "../src/traffic-light.ts";
+import "../traffic-light.ts";
 
 const { events, args, argTypes, template } =
   getStorybookHelpers("traffic-light");

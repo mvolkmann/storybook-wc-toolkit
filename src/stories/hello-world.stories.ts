@@ -5,13 +5,13 @@ import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
 // Type-only imports are used by TypeScript for type checking,
 // but are erased during compilation.
 // They do not cause the module to be loaded at runtime.
-import type { HelloWorld } from "../src/hello-world.ts";
+import type { HelloWorld } from "../hello-world.ts";
 
 // This is a side-effect import, which loads a module
 // without importing any specific bindings.
 // Its purpose is to execute the module's code
 // which registers the custom element.
-import "../src/hello-world.ts";
+import "../hello-world.ts";
 
 const { events, args, argTypes, template } = getStorybookHelpers("hello-world");
 
