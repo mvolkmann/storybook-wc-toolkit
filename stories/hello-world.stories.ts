@@ -7,9 +7,10 @@ import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
 // They do not cause the module to be loaded at runtime.
 import type { HelloWorld } from "../src/hello-world.ts";
 
-// This is a side-effect import, which is one that
-// loads a module without importing any specific bindings.
-// Its purpose is to execute the module’s code.
+// This is a side-effect import, which loads a module
+// without importing any specific bindings.
+// Its purpose is to execute the module's code
+// which registers the custom element.
 import "../src/hello-world.ts";
 
 const { events, args, argTypes, template } = getStorybookHelpers("hello-world");
@@ -63,7 +64,5 @@ export const Default: Story = {
 };
 
 export const Named: Story = {
-  args: {
-    name: "Mark",
-  },
+  args: { name: "Mark" },
 };
