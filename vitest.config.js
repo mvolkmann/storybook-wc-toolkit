@@ -15,6 +15,7 @@ export default defineConfig({
   test: {
     coverage: {
       include: ["src/**/*.{js,ts}"],
+      exclude: ["src/stories"],
     },
     projects: [
       {
