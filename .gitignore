@@ -2,4 +2,5 @@ build-storybook.log
 coverage
 node_modules
 storybook-static
+.DS_Store
 .vscode/settings.json
