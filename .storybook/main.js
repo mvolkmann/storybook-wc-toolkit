@@ -15,5 +15,23 @@ const config = {
   docs: {
     autodocs: "tag",
   },
+  // This may be needed by the deploy-storybook script.
+  /*
+  async viteFinal(config, { configType }) {
+    if (configType === "PRODUCTION") {
+      config.plugins = config.plugins?.filter((plugin) => {
+        const { name } = plugin;
+        return !name || !name.startsWith("vite:");
+      });
+    } else {
+      config.plugins?.push(viteMockServe({}));
+    }
+    return {
+      ...config,
+      base: "/storybook-wc-toolkit/",
+    };
+    return config;
+  },
+  */
 };
 export default config;
