@@ -43,6 +43,12 @@ template.innerHTML = html`
   </button>
 `;
 
+export enum Light {
+  Stop = "stop",
+  Yield = "yield",
+  Go = "go",
+}
+
 /**
  * This web component emulates a U.S. traffic light
  * with red, yellow, and green lights.
@@ -52,11 +58,10 @@ template.innerHTML = html`
  * To get the current state, access the `state` property of an instance.
  * It is intentional that the state cannot be changed by
  * modifying the `state` attribute or setting the `state` property.
- * @attr {string} [state="stop"] - The starting state.
+ * @attr {Light} [state=Light.Stop] - The starting state.
  */
 export class TrafficLight extends HTMLElement {
-  private static states = ["stop", "yield", "go"];
-  private _state: string = "stop";
+  private _state: Light = Light.Stop;
   private stateToDivMap = new Map();
 
   constructor() {
@@ -65,13 +70,13 @@ export class TrafficLight extends HTMLElement {
   }
 
   connectedCallback() {
-    const initial = this.getAttribute("state") ?? "";
-    this._state = TrafficLight.states.includes(initial) ? initial : "stop";
+    const initial = (this.getAttribute("state") ?? "") as Light;
+    this._state = Object.values(Light).includes(initial) ? initial : Light.Stop;
 
     this.shadowRoot?.appendChild(template.content.cloneNode(true));
 
     const divs = this.shadowRoot?.querySelectorAll("div") ?? [];
-    TrafficLight.states.forEach((state, index) => {
+    Object.values(Light).forEach((state, index) => {
       this.stateToDivMap.set(state, divs[index]);
     });
 
@@ -85,10 +90,20 @@ export class TrafficLight extends HTMLElement {
     return this._state;
   }
 
+  //TODO: This was added temporarily to test the default Storybook control.
+  set state(newValue: Light) {
+    this._state = newValue;
+  }
+
   next() {
     this.change(false);
     const s = this.state;
-    this._state = s === "stop" ? "yield" : s === "yield" ? "go" : "stop";
+    this._state =
+      s === Light.Stop
+        ? Light.Yield
+        : s === Light.Yield
+        ? Light.Go
+        : Light.Stop;
     this.change(true);
     this.dispatchEvent(
       new CustomEvent("state-change", {

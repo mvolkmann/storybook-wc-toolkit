@@ -5,7 +5,7 @@ import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
 // Type-only imports are used by TypeScript for type checking,
 // but are erased during compilation.
 // They do not cause the module to be loaded at runtime.
-import type { TrafficLight } from "../traffic-light.ts";
+import { Light, type TrafficLight } from "../traffic-light.ts";
 
 // This is a side-effect import, which loads a module
 // without importing any specific bindings.
@@ -49,13 +49,13 @@ export const Default: Story = {
     // calling the next method or clicking the button.
 
     trafficLight.next();
-    expect(trafficLight).toHaveProperty("state", "yield");
+    expect(trafficLight).toHaveProperty("state", Light.Yield);
 
     trafficLight.shadowRoot?.querySelector("button")?.click();
-    expect(trafficLight).toHaveProperty("state", "go");
+    expect(trafficLight).toHaveProperty("state", Light.Go);
 
     trafficLight.next();
-    expect(trafficLight).toHaveProperty("state", "stop");
+    expect(trafficLight).toHaveProperty("state", Light.Stop);
   },
 };
 
@@ -71,7 +71,7 @@ const render = (args: Record<string, string>) => {
 
 // This story specifies a value for the "state" attribute.
 export const Specified: Story = {
-  args: { state: "go" },
+  args: { state: Light.Go },
   // The default render function assumes that the component being tested
   // has a settable property that corresponds to each args entry.
   // The traffic-light component does not have a settable "state" property,
@@ -82,12 +82,12 @@ export const Specified: Story = {
       "traffic-light"
     ) as HTMLElement;
     expect(trafficLight).toBeInTheDocument();
-    expect(trafficLight).toHaveProperty("state", "go");
+    expect(trafficLight).toHaveProperty("state", Light.Go);
     trafficLight.click();
-    expect(trafficLight).toHaveProperty("state", "stop");
+    expect(trafficLight).toHaveProperty("state", Light.Stop);
     trafficLight.click();
-    expect(trafficLight).toHaveProperty("state", "yield");
+    expect(trafficLight).toHaveProperty("state", Light.Yield);
     trafficLight.click();
-    expect(trafficLight).toHaveProperty("state", "go");
+    expect(trafficLight).toHaveProperty("state", Light.Go);
   },
 };
