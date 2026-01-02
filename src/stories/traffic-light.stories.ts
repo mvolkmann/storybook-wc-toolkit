@@ -15,7 +15,8 @@ import "../traffic-light.ts";
 
 const { events, args, argTypes, template } =
   getStorybookHelpers("traffic-light");
-console.log("traffic-light.stories.ts : argTypes =", argTypes);
+console.log("traffic-light.stories.ts: argTypes =", argTypes);
+console.log("traffic-light.stories.ts: events =", events);
 // events is set to ["state-change"] which is an array containing
 // the event name that is dispatched by the TrafficLight next method.
 
@@ -29,7 +30,8 @@ const meta: Meta<TrafficLight> = {
     // This should cause "state-change" events to be logged to the
     // Actions tab when the tests are run, but it does not work.
     actions: {
-      handles: events,
+      //handles: events,
+      handles: ["click", "state-change"],
     },
   },
   tags: ["autodocs"],
@@ -45,16 +47,14 @@ export const Default: Story = {
       "traffic-light"
     ) as TrafficLight;
     expect(trafficLight).toBeInTheDocument();
+    trafficLight.state = "stop";
 
     // There are two ways to advance to the next state,
     // calling the next method or clicking the button.
-
     trafficLight.next();
     expect(trafficLight).toHaveProperty("state", "yield");
-
     trafficLight.shadowRoot?.querySelector("button")?.click();
     expect(trafficLight).toHaveProperty("state", "go");
-
     trafficLight.next();
     expect(trafficLight).toHaveProperty("state", "stop");
   },

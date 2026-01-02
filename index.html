@@ -3,6 +3,12 @@
   <head>
     <script src="src/hello-world.ts" type="module"></script>
     <script src="src/traffic-light.ts" type="module"></script>
+    <script type="module">
+      const tl = document.querySelector("traffic-light");
+      tl.addEventListener("state-change", (e) => {
+        console.log("state-change event fired:", e.detail);
+      });
+    </script>
   </head>
   <body>
     <hello-world></hello-world>
