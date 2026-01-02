@@ -68,7 +68,7 @@ export class TrafficLight extends HTMLElement {
 
   attributeChangedCallback(name: string, _oldValue: string, newValue: string) {
     if (name === "state" && newValue !== this.#state) {
-      this.state = newValue;
+      this.state = newValue; // calls "set state" below
     }
   }
 
@@ -98,13 +98,6 @@ export class TrafficLight extends HTMLElement {
     this.#state = value;
     this.change(true); // turns on new light
     this.setAttribute("state", value);
-  }
-
-  next() {
-    this.change(false);
-    const s = this.state;
-    this.#state = s === "stop" ? "yield" : s === "yield" ? "go" : "stop";
-    this.change(true);
     this.dispatchEvent(
       new CustomEvent("state-change", {
         detail: { state: this.state },
@@ -114,8 +107,14 @@ export class TrafficLight extends HTMLElement {
     );
   }
 
+  next() {
+    const s = this.state;
+    this.state = s === "stop" ? "yield" : s === "yield" ? "go" : "stop";
+  }
+
   private change(on: boolean) {
-    this.#stateToDivMap.get(this.#state).classList.toggle("on", on);
+    const div = this.#stateToDivMap.get(this.#state);
+    div?.classList.toggle("on", on);
   }
 }
 

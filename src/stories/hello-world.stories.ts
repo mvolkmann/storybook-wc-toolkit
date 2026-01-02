@@ -14,6 +14,7 @@ import type { HelloWorld } from "../hello-world.ts";
 import "../hello-world.ts";
 
 const { events, args, argTypes, template } = getStorybookHelpers("hello-world");
+console.log("hello-world.stories.ts : argTypes =", argTypes);
 
 const meta: Meta<HelloWorld> = {
   title: "Components/HelloWorld",

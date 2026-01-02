@@ -15,6 +15,7 @@ import "../traffic-light.ts";
 
 const { events, args, argTypes, template } =
   getStorybookHelpers("traffic-light");
+console.log("traffic-light.stories.ts : argTypes =", argTypes);
 // events is set to ["state-change"] which is an array containing
 // the event name that is dispatched by the TrafficLight next method.
 
