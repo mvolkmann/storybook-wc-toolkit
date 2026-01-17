@@ -5,7 +5,7 @@ template.innerHTML = html`<p>Hello, <span></span>!</p>`;
 
 /**
  * This is a simple web component that renders a greeting message.
- * @attr {string} [name] - The name of the person to greet
+ * @attr {string} name - The name of the person to greet
  * @prop {string} [name=World] - The name of the person to greet
  */
 export class HelloWorld extends HTMLElement {

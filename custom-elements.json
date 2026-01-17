@@ -217,7 +217,7 @@
           "type": {
             "text": "Story"
           },
-          "default": "{ play: ({ canvasElement }) => { const helloWorld = canvasElement.querySelector(\"hello-world\") as HelloWorld; expect(helloWorld).toBeInTheDocument(); function verifyText(name: string) { const p = helloWorld.shadowRoot?.querySelector(\"p\"); expect(p).toBeInTheDocument(); expect(p).toHaveTextContent(`Hello, ${name}!`); } let name = \"World\"; // The \"name\" attribute is not set yet. verifyText(name); // Set the \"name\" attribute. name = \"Tami\"; helloWorld.setAttribute(\"name\", name); expect(helloWorld).toHaveProperty(\"name\", name); verifyText(name); // Set the \"name\" property. name = \"Comet\"; helloWorld.name = name; expect(helloWorld).toHaveAttribute(\"name\", name); verifyText(name); helloWorld.name = \"World\"; // return to default value }, }"
+          "default": "{ play: ({ canvasElement }) => { const helloWorld = canvasElement.querySelector(\"hello-world\") as HelloWorld; expect(helloWorld).toBeInTheDocument(); function verifyText(name: string) { const p = helloWorld.shadowRoot?.querySelector(\"p\"); expect(p).toBeInTheDocument(); expect(p).toHaveTextContent(`Hello, ${name}!`); } let name = \"World\"; // The \"name\" property is not set yet. // Uncomment the next line to demonstrate a test failure. //verifyText(name); // Set the \"name\" attribute. name = \"Tami\"; helloWorld.setAttribute(\"name\", name); expect(helloWorld).toHaveProperty(\"name\", name); verifyText(name); // Set the \"name\" property. name = \"Comet\"; helloWorld.name = name; expect(helloWorld).toHaveAttribute(\"name\", name); verifyText(name); helloWorld.name = \"World\"; // return to default value }, }"
         },
         {
           "kind": "variable",
