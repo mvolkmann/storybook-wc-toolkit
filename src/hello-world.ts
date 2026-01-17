@@ -5,10 +5,13 @@ template.innerHTML = html`<p>Hello, <span></span>!</p>`;
 
 /**
  * This is a simple web component that renders a greeting message.
- * @attr {string} [name="World"] - The name of the person to greet
+ * @attr {string} [name] - The name of the person to greet
+ * @prop {string} [name=World] - The name of the person to greet
  */
 export class HelloWorld extends HTMLElement {
   private span: HTMLSpanElement | undefined | null;
+
+  #name = "World";
 
   static get observedAttributes() {
     return ["name"];
@@ -19,10 +22,12 @@ export class HelloWorld extends HTMLElement {
     this.attachShadow({ mode: "open" });
   }
 
-  attributeChangedCallback(name: string, _oldValue: string, newValue: string) {
-    if (this.span && name === "name") {
-      this.span.textContent = newValue;
-    }
+  attributeChangedCallback(
+    attrName: string,
+    _oldValue: string,
+    newValue: string
+  ) {
+    if (attrName === "name") this.name = newValue;
   }
 
   connectedCallback() {
@@ -34,10 +39,13 @@ export class HelloWorld extends HTMLElement {
   }
 
   get name() {
-    return this.getAttribute("name") ?? "";
+    return this.#name;
   }
 
   set name(value: string) {
+    if (value === this.#name) return;
+    this.#name = value;
+    if (this.span) this.span.textContent = value;
     this.setAttribute("name", value);
   }
 }

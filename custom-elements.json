@@ -21,7 +21,21 @@
             },
             {
               "kind": "field",
-              "name": "name"
+              "name": "#name",
+              "privacy": "private",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"World\""
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "The name of the person to greet",
+              "default": "World"
             }
           ],
           "attributes": [
@@ -30,8 +44,7 @@
               "type": {
                 "text": "string"
               },
-              "description": "The name of the person to greet",
-              "default": "\"World\""
+              "description": "The name of the person to greet"
             }
           ],
           "superclass": {
@@ -292,7 +305,7 @@
           "type": {
             "text": "Meta<TrafficLight>"
           },
-          "default": "{ title: \"Components/TrafficLight\", component: \"traffic-light\", args, argTypes, render: (args) => template(args), parameters: { // This should cause \"state-change\" events to be logged to the // Actions tab when the tests are run, but it does not work. actions: { handles: events, }, }, tags: [\"autodocs\"], }"
+          "default": "{ title: \"Components/TrafficLight\", component: \"traffic-light\", args, argTypes, render: (args) => template(args), parameters: { // This should cause \"state-change\" events to be logged to the // Actions tab when the tests are run, but it does not work. actions: { //handles: events, handles: [\"click\", \"state-change\"], }, }, tags: [\"autodocs\"], }"
         },
         {
           "kind": "variable",
@@ -300,7 +313,7 @@
           "type": {
             "text": "Story"
           },
-          "default": "{ play: ({ canvasElement }) => { const trafficLight = canvasElement.querySelector( \"traffic-light\" ) as TrafficLight; expect(trafficLight).toBeInTheDocument(); // There are two ways to advance to the next state, // calling the next method or clicking the button. trafficLight.next(); expect(trafficLight).toHaveProperty(\"state\", \"yield\"); trafficLight.shadowRoot?.querySelector(\"button\")?.click(); expect(trafficLight).toHaveProperty(\"state\", \"go\"); trafficLight.next(); expect(trafficLight).toHaveProperty(\"state\", \"stop\"); }, }"
+          "default": "{ play: ({ canvasElement }) => { const trafficLight = canvasElement.querySelector( \"traffic-light\" ) as TrafficLight; expect(trafficLight).toBeInTheDocument(); trafficLight.state = \"stop\"; // There are two ways to advance to the next state, // calling the next method or clicking the button. trafficLight.next(); expect(trafficLight).toHaveProperty(\"state\", \"yield\"); trafficLight.shadowRoot?.querySelector(\"button\")?.click(); expect(trafficLight).toHaveProperty(\"state\", \"go\"); trafficLight.next(); expect(trafficLight).toHaveProperty(\"state\", \"stop\"); }, }"
         },
         {
           "kind": "variable",
