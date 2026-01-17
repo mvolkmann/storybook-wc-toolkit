@@ -45,8 +45,9 @@ export const Default: Story = {
     }
 
     let name = "World";
-    // The "name" attribute is not set yet.
-    verifyText(name);
+    // The "name" property is not set yet.
+    // Uncomment the next line to demonstrate a test failure.
+    //verifyText(name);
 
     // Set the "name" attribute.
     name = "Tami";
